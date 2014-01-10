@@ -6,7 +6,7 @@ include Mongo
 
 begin
 
-    con = Mysql.new 'localhost', 'root', 'aoeu.123', 'test_db'
+    con = Mysql.new 'localhost', 'username', 'password', 'test_db'
     r = con.query("SELECT * FROM news")
     
     type = {
@@ -23,26 +23,26 @@ begin
 	coll = db.collection("news")
 
 	r.each_hash {
-		|h|
+		|i|
 		tmp = "-1"
 		r_type = con.query("SELECT * FROM news_to_type_rel")
 		r_type.each_hash {
-			|i|
-			tmp = i['news_type_id'].to_s if i['news_id'] == h['id'] 
+			|j|
+			tmp = j['news_type_id'].to_s if j['news_id'] == i['id'] 
 		}
 		doc = {
-			"id" => h['id'],
-			"headline" => h['headline'],
-			"body" => h['body'],
-			"time" => h['time'],
-			"hide" => h['hide'],
-			"url" => h['url'],
-			"event_time" => h['event_time'],
-			"youtube" => h['youtube'],
-			"vimeo" => h['vimeo'],
-			"sponsored" => h['sponsored'],
-			"event_until" => h['event_until'],
-			"urlname" => h['news_id'],
+			"id" => i['id'],
+			"headline" => i['headline'],
+			"body" => i['body'],
+			"time" => i['time'],
+			"hide" => i['hide'],
+			"url" => i['url'],
+			"event_time" => i['event_time'],
+			"youtube" => i['youtube'],
+			"vimeo" => i['vimeo'],
+			"sponsored" => i['sponsored'],
+			"event_until" => i['event_until'],
+			"urlname" => i['news_id'],
 			"type" => type[tmp]
 		}
 		coll.insert(doc)

@@ -6,7 +6,8 @@ Some code work, having to migrate mysql database to mongodb, and fixing relation
 Required
 ---------
 1. [gem install mysql](https://rubygems.org/gems/mysql).
-1. [gem install mongo](http://rubygems.org/gems/mongo).
+2. [gem install mongo](http://rubygems.org/gems/mongo).
+3. Replace credentials and add appropriate queries
 
 Description
 -----------
